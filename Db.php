@@ -105,7 +105,7 @@ class Db {
 	public function __construct ( $driver, $host, $database, $user, $password = null ) {
 		set_exception_handler( array( __CLASS__, 'safe_exception' ) );
 		$this->db = new pdo( $driver . ':host=' . $host . ';dbname=' . $database, $user, $password, array(
-			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,  PDO::ATTR_PERSISTENT => true
 		) );
 		restore_exception_handler();
 		$this->info = (object) array_combine( static::$arguments, func_get_args() );
